@@ -20,24 +20,21 @@ requirements:
     - python
   run:
     - python
-    - attrs >=19.2.0
-    - jsonschema >=4.19.1
-    - jsonschema-specifications >=2023.5.2
+    - jsonschema >=4.19.1,<5.0.0a0
+    - jsonschema-specifications >=2023.5.2,<2024.0.0
     - rfc3339-validator
 
 test:
   source_files:
-    - openapi_schema_validator/
-    - tests/
+    - tests
   imports:
     - openapi_schema_validator
   commands:
     - pip check
-    - pytest ./tests --capture=no --verbose --showlocals --junitxml=reports/junit.xml --cov=openapi_schema_validator --cov-report=term-missing --cov-report=xml
+    - pytest -vv --cov=openapi_schema_validator --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=80
   requires:
     - pip
-    - pytest
-    - pytest-cov 
+    - pytest-cov
 
 about:
   home: https://github.com/p1c2u/openapi-schema-validator
