@@ -33,16 +33,20 @@ test:
     - openapi_schema_validator
   commands:
     - pip check
-    - pytest ./tests --capture=no --verbose --showlocals
+    - pytest ./tests --capture=no --verbose --showlocals --junitxml=reports/junit.xml --cov=openapi_schema_validator --cov-report=term-missing --cov-report=xml
   requires:
     - pip
     - pytest
+    - pytest-cov 
 
 about:
   home: https://github.com/p1c2u/openapi-schema-validator
   summary: OpenAPI schema validation for Python
+  doc_source_url: https://github.com/p1c2u/openapi-schema-validator
+  dev_url: https://github.com/p1c2u/openapi-schema-validator
   license: BSD-3-Clause
   license_file: LICENSE
+  license-family: BSD
 
 extra:
   recipe-maintainers:
