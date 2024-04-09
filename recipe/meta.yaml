@@ -9,6 +9,7 @@ source:
   sha256: 11a95c9c9017912964e3e5f2545a5b11c3814880681fcacfb73b1759bb4f2804
 
 build:
+  skip: true # [py<38]
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
@@ -20,17 +21,22 @@ requirements:
   run:
     - python
     - attrs >=19.2.0
-    - jsonschema 
-    - jsonschema-specifications
+    - jsonschema >=4.19.1
+    - jsonschema-specifications >=2023.5.2
     - rfc3339-validator
 
 test:
+  source_files:
+    - openapi_schema_validator/
+    - tests/
   imports:
     - openapi_schema_validator
   commands:
     - pip check
+    - pytest ./tests --capture=no --verbose --showlocals
   requires:
     - pip
+    - pytest
 
 about:
   home: https://github.com/p1c2u/openapi-schema-validator
