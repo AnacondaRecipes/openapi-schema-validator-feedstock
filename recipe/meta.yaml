@@ -31,6 +31,7 @@ test:
     - openapi_schema_validator
   commands:
     - pip check
+    # skipping test_array_prefixitems_invalid because of https://github.com/python-openapi/openapi-schema-validator/issues/153
     - pytest -vv --cov=openapi_schema_validator --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=80 -k "not test_array_prefixitems_invalid[value0]"
   requires:
     - pip
