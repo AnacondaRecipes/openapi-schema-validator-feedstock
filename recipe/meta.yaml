@@ -42,7 +42,7 @@ about:
   summary: OpenAPI schema validation for Python
   description: |
     OpenAPI schema validation for Python
-  doc_source_url: https://github.com/p1c2u/openapi-schema-validator
+  doc_url: https://openapi-schema-validator.readthedocs.io
   dev_url: https://github.com/p1c2u/openapi-schema-validator
   license: BSD-3-Clause
   license_file: LICENSE
