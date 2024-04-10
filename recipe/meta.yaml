@@ -1,4 +1,4 @@
-{% set version = "0.4.3" %}
+{% set version = "0.6.2" %}
 
 package:
   name: openapi-schema-validator
@@ -6,37 +6,47 @@ package:
 
 source:
   url: https://pypi.io/packages/source/o/openapi-schema-validator/openapi_schema_validator-{{ version }}.tar.gz
-  sha256: 6940dba9f4906c97078fea6fd9d5a3a3384207db368c4e32f6af6abd7c5c560b
+  sha256: 11a95c9c9017912964e3e5f2545a5b11c3814880681fcacfb73b1759bb4f2804
 
 build:
+  skip: true # [py<38]
   number: 0
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
     - pip
     - poetry-core >=1.0.0
-    - python >=3.7
+    - python
   run:
-    - attrs >=19.2.0
-    - jsonschema >=4.0.0,<5.0.0
-    - python >=3.7
+    - python
+    - jsonschema >=4.19.1,<5.0.0a0
+    - jsonschema-specifications >=2023.5.2,<2024.0.0
     - rfc3339-validator
 
 test:
+  source_files:
+    - tests
   imports:
     - openapi_schema_validator
   commands:
     - pip check
+    # skipping test_array_prefixitems_invalid because of https://github.com/python-openapi/openapi-schema-validator/issues/153
+    - pytest -v -k "not test_array_prefixitems_invalid[value0]"
   requires:
     - pip
+    - pytest
 
 about:
   home: https://github.com/p1c2u/openapi-schema-validator
   summary: OpenAPI schema validation for Python
+  description: |
+    OpenAPI schema validation for Python
+  doc_url: https://openapi-schema-validator.readthedocs.io
+  dev_url: https://github.com/p1c2u/openapi-schema-validator
   license: BSD-3-Clause
   license_file: LICENSE
+  license_family: BSD
 
 extra:
   recipe-maintainers:
