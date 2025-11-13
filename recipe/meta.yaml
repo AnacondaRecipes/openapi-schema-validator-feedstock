@@ -10,9 +10,9 @@ source:
   sha256: f37bace4fc2a5d96692f4f8b31dc0f8d7400fd04f3a937798eaf880d425de6ee
 
 build:
-  skip: true # [py<38]
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: true # [py<38]
 
 requirements:
   host:
@@ -21,8 +21,8 @@ requirements:
     - python
   run:
     - python
-    - jsonschema >=4.19.1,<5.0.0a0
-    - jsonschema-specifications >=2023.5.2,<2024.0.0
+    - jsonschema >=4.19.1,<5.0.0
+    - jsonschema-specifications >=2023.5.2
     - rfc3339-validator
 
 test:
