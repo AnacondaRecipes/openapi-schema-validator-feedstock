@@ -1,17 +1,18 @@
-{% set version = "0.6.2" %}
+{% set name = "openapi-schema-validator" %}
+{% set version = "0.6.3" %}
 
 package:
-  name: openapi-schema-validator
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/o/openapi-schema-validator/openapi_schema_validator-{{ version }}.tar.gz
-  sha256: 11a95c9c9017912964e3e5f2545a5b11c3814880681fcacfb73b1759bb4f2804
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
+  sha256: f37bace4fc2a5d96692f4f8b31dc0f8d7400fd04f3a937798eaf880d425de6ee
 
 build:
-  skip: true # [py<38]
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: true # [py<38]
 
 requirements:
   host:
@@ -20,8 +21,8 @@ requirements:
     - python
   run:
     - python
-    - jsonschema >=4.19.1,<5.0.0a0
-    - jsonschema-specifications >=2023.5.2,<2024.0.0
+    - jsonschema >=4.19.1,<5.0.0
+    - jsonschema-specifications >=2023.5.2
     - rfc3339-validator
 
 test:
@@ -31,8 +32,7 @@ test:
     - openapi_schema_validator
   commands:
     - pip check
-    # skipping test_array_prefixitems_invalid because of https://github.com/python-openapi/openapi-schema-validator/issues/153
-    - pytest -v -k "not test_array_prefixitems_invalid[value0]"
+    - pytest -v 
   requires:
     - pip
     - pytest
