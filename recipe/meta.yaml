@@ -12,12 +12,12 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: true  # [py<38]
+  skip: true  # [py<310]
 
 requirements:
   host:
     - pip
-    - poetry-core
+    - poetry-core >=1.0.0
     - python
   run:
     - python
